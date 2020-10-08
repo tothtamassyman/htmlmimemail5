@@ -16,9 +16,9 @@ class FileAttachment extends Attachment
     /**
      * Constructor
      *
-     * @param string $filename    Name of file
+     * @param string $filename Name of file
      * @param string $contentType Content type of file
-     * @param string $encoding    What encoding to use
+     * @param string $encoding What encoding to use
      */
     public function __construct($filename, $contentType = 'application/octet-stream', $encoding = null)
     {

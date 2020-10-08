@@ -13,12 +13,13 @@ namespace HtmlMimeMail5;
  */
 class SevenBitEncoding implements IEncoding
 {
-    /*
-    * Function to "encode" data using
-    * 7bit encoding.
-    *
-    * @param string $input Data to encode
-    */
+    /**
+     * Function to "encode" data using
+     * 7bit encoding.
+     *
+     * @param string $input Data to encode
+     * @return string
+     */
     public function encode($input)
     {
         return $input;

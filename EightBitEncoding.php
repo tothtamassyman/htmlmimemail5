@@ -13,12 +13,13 @@ namespace HtmlMimeMail5;
  */
 class EightBitEncoding implements IEncoding
 {
-    /*
-    * Function to "encode" data using
-    * 8bit encoding.
-    *
-    * @param string $input Data to encode
-    */
+    /**
+     * Function to "encode" data using
+     * 8bit encoding.
+     *
+     * @param string $input Data to encode
+     * @return string
+     */
     public function encode($input)
     {
         return $input;

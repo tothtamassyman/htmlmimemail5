@@ -13,12 +13,13 @@ namespace HtmlMimeMail5;
  */
 class Base64Encoding implements IEncoding
 {
-    /*
-    * Function to encode data using
-    * base64 encoding.
-    *
-    * @param string $input Data to encode
-    */
+    /**
+     * Function to encode data using
+     * base64 encoding.
+     *
+     * @param string $input Data to encode
+     * @return string
+     */
     public function encode($input)
     {
         return rtrim(chunk_split(base64_encode($input), 76, defined('MAIL_MIME_PART_CRLF') ? MAIL_MIME_PART_CRLF : "\r\n"));

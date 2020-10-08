@@ -40,16 +40,16 @@ class Attachment
     /**
      * Constructor
      *
-     * @param string $data        File data
-     * @param string $name        Name of attachment (filename)
+     * @param string $data File data
+     * @param string $name Name of attachment (filename)
      * @param string $contentType Content type of attachment
-     * @param IEncoding $encoding    Encoding type to use
+     * @param IEncoding $encoding Encoding type to use
      */
     public function __construct($data, $name, $contentType, IEncoding $encoding)
     {
-        $this->data        = $data;
-        $this->name        = $name;
+        $this->data = $data;
+        $this->name = $name;
         $this->contentType = $contentType;
-        $this->encoding    = $encoding;
+        $this->encoding = $encoding;
     }
 }

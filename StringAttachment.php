@@ -17,10 +17,10 @@ class StringAttachment extends Attachment
     /**
      * Constructor
      *
-     * @param string $data        File data
-     * @param string $name        Name of attachment (filename)
+     * @param string $data File data
+     * @param string $name Name of attachment (filename)
      * @param string $contentType Content type of file
-     * @param string $encoding    What encoding to use
+     * @param string $encoding What encoding to use
      */
     public function __construct($data, $name = '', $contentType = 'application/octet-stream', $encoding = null)
     {

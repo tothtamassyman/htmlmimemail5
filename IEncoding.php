@@ -14,5 +14,6 @@ namespace HtmlMimeMail5;
 interface IEncoding
 {
     public function encode($input);
+
     public function getType();
 }

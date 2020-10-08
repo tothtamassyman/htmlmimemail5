@@ -113,11 +113,11 @@ class HtmlMimeMail5
         /**
          * Initialise some variables.
          */
-        $this->attachments   = array();
-        $this->html_images   = array();
-        $this->headers       = array();
-        $this->is_built      = false;
-        $this->text          = '';
+        $this->attachments = array();
+        $this->html_images = array();
+        $this->headers = array();
+        $this->is_built = false;
+        $this->text = '';
         $this->sendmail_path = '/usr/lib/sendmail -ti';
 
         /**
@@ -125,25 +125,25 @@ class HtmlMimeMail5
          * to find other image/file types, add the
          * extension and content type here.
          */
-        $this->image_types = array('gif'  => 'image/gif',
-            'jpg'  => 'image/jpeg',
+        $this->image_types = array('gif' => 'image/gif',
+            'jpg' => 'image/jpeg',
             'jpeg' => 'image/jpeg',
-            'jpe'  => 'image/jpeg',
-            'bmp'  => 'image/bmp',
-            'png'  => 'image/png',
-            'tif'  => 'image/tiff',
+            'jpe' => 'image/jpeg',
+            'bmp' => 'image/bmp',
+            'png' => 'image/png',
+            'tif' => 'image/tiff',
             'tiff' => 'image/tiff',
-            'swf'  => 'application/x-shockwave-flash');
+            'swf' => 'application/x-shockwave-flash');
 
         /**
          * Set these up
          */
         $this->build_params['html_encoding'] = new QPrintEncoding();
         $this->build_params['text_encoding'] = new SevenBitEncoding();
-        $this->build_params['html_charset']  = 'ISO-8859-15';
-        $this->build_params['text_charset']  = 'ISO-8859-15';
-        $this->build_params['head_charset']  = 'ISO-8859-15';
-        $this->build_params['text_wrap']     = 998;
+        $this->build_params['html_charset'] = 'ISO-8859-15';
+        $this->build_params['text_charset'] = 'ISO-8859-15';
+        $this->build_params['head_charset'] = 'ISO-8859-15';
+        $this->build_params['text_wrap'] = 998;
 
         /**
          * Defaults for smtp sending
@@ -196,7 +196,7 @@ class HtmlMimeMail5
      * @param string $host Hostname
      * @param string $port Port
      * @param string $helo HELO string to use
-     * @param bool   $auth User authentication or not
+     * @param bool $auth User authentication or not
      * @param string $user Username
      * @param string $pass Password
      */
@@ -283,7 +283,7 @@ class HtmlMimeMail5
     /**
      * Accessor to set a header
      *
-     * @param string $name  Name of header
+     * @param string $name Name of header
      * @param string $value Value of header
      */
     public function setHeader($name, $value)
@@ -387,7 +387,7 @@ class HtmlMimeMail5
      * If third part is given, images in the email will be loaded
      * from this directory.
      *
-     * @param string $html       HTML part of email
+     * @param string $html HTML part of email
      * @param string $images_dir Images directory
      */
     function setHTML($html, $images_dir = null)
@@ -415,7 +415,8 @@ class HtmlMimeMail5
         // Build the list of image extensions
         $extensions = array_keys($this->image_types);
 
-        preg_match_all('/(?:"|\')([^"\']+\.('.implode('|', $extensions).'))(?:"|\')/Ui', $this->html, $matches);
+        #preg_match_all('/(?:"|\')([^"\']+\.('.implode('|', $extensions).'))(?:"|\')/Ui', $this->html, $matches);
+        preg_match_all('/["\']([^"\']+\.(' . implode('|', $extensions) . '))["\']/Ui', $this->html, $matches);
 
         foreach ($matches[1] as $m) {
             if (file_exists($images_dir . $m)) {
@@ -435,7 +436,7 @@ class HtmlMimeMail5
 
             foreach ($html_images as $img) {
                 if ($image = file_get_contents($images_dir . $img)) {
-                    $ext          = preg_replace('#^.*\.(\w{3,4})$#e', 'strtolower("$1")', $img);
+                    $ext = preg_replace('#^.*\.(\w{3,4})$#e', 'strtolower("$1")', $img);
                     $content_type = $this->image_types[$ext];
                     $this->addEmbeddedImage(new stringEmbeddedImage($image, basename($img), $content_type));
                 }
@@ -470,14 +471,14 @@ class HtmlMimeMail5
     /**
      * Adds a text subpart to a mime_part object
      *
-     * @param  object $obj
-     * @return object      Mime part object
+     * @param $message
+     * @return void Mime part object
      */
     private function addTextPart(&$message)
     {
         $params['content_type'] = 'text/plain';
-        $params['encoding']     = $this->build_params['text_encoding']->getType();
-        $params['charset']      = $this->build_params['text_charset'];
+        $params['encoding'] = $this->build_params['text_encoding']->getType();
+        $params['charset'] = $this->build_params['text_charset'];
 
         if (!empty($message)) {
             $message->addSubpart($this->text, $params);
@@ -489,14 +490,14 @@ class HtmlMimeMail5
     /**
      * Adds a html subpart to a mime_part object
      *
-     * @param object $obj
-     * @return object     Mime part object
+     * @param $message
+     * @return void Mime part object
      */
     private function addHtmlPart(&$message)
     {
         $params['content_type'] = 'text/html';
-        $params['encoding']     = $this->build_params['html_encoding']->getType();
-        $params['charset']      = $this->build_params['html_charset'];
+        $params['encoding'] = $this->build_params['html_encoding']->getType();
+        $params['charset'] = $this->build_params['html_charset'];
 
         if (!empty($message)) {
             $message->addSubpart($this->html, $params);
@@ -508,7 +509,8 @@ class HtmlMimeMail5
     /**
      * Starts a message with a mixed part
      *
-     * @return object Mime part object
+     * @param $message
+     * @return void Mime part object
      */
     private function addMixedPart(&$message)
     {
@@ -520,7 +522,7 @@ class HtmlMimeMail5
     /**
      * Adds an alternative part to a mime_part object
      *
-     * @param  object $obj
+     * @param $message
      * @return object      Mime part object
      */
     private function addAlternativePart(&$message)
@@ -537,7 +539,7 @@ class HtmlMimeMail5
     /**
      * Adds a html subpart to a mime_part object
      *
-     * @param  object $obj
+     * @param $message
      * @return object      Mime part object
      */
     private function addRelatedPart(&$message)
@@ -554,16 +556,16 @@ class HtmlMimeMail5
     /**
      * Adds all html images to a mime_part object
      *
-     * @param  object $obj Message object
+     * @param $message
      */
     private function addHtmlImageParts(&$message)
     {
         foreach ($this->html_images as $value) {
             $params['content_type'] = $value->contentType;
-            $params['encoding']     = $value->encoding->getType();
-            $params['disposition']  = 'inline';
-            $params['dfilename']    = $value->name;
-            $params['cid']          = $value->cid;
+            $params['encoding'] = $value->encoding->getType();
+            $params['disposition'] = 'inline';
+            $params['dfilename'] = $value->name;
+            $params['cid'] = $value->cid;
 
             $message->addSubpart($value->data, $params);
         }
@@ -572,15 +574,15 @@ class HtmlMimeMail5
     /**
      * Adds all attachments to a mime_part object
      *
-     * @param object $obj Message object
+     * @param $message
      */
     private function addAttachmentParts(&$message)
     {
         foreach ($this->attachments as $value) {
             $params['content_type'] = $value->contentType;
-            $params['encoding']     = $value->encoding->getType();
-            $params['disposition']  = 'attachment';
-            $params['dfilename']    = $value->name;
+            $params['encoding'] = $value->encoding->getType();
+            $params['disposition'] = 'attachment';
+            $params['dfilename'] = $value->name;
 
             $message->addSubpart($value->data, $params);
         }
@@ -594,18 +596,18 @@ class HtmlMimeMail5
         if (!empty($this->html_images)) {
             foreach ($this->html_images as $value) {
                 $quoted = preg_quote($value->name);
-                $cid    = preg_quote($value->cid);
+                $cid = preg_quote($value->cid);
 
                 $this->html = preg_replace("#src=\"$quoted\"|src='$quoted'#", "src=\"cid:$cid\"", $this->html);
                 $this->html = preg_replace("#background=\"$quoted\"|background='$quoted'#", "background=\"cid:$cid\"", $this->html);
             }
         }
 
-        $message     = null;
+        $message = null;
         $attachments = !empty($this->attachments);
         $html_images = !empty($this->html_images);
-        $html        = !empty($this->html);
-        $text        = !$html;
+        $html = !empty($this->html);
+        $text = !$html;
 
         switch (true) {
             case $text:
@@ -668,8 +670,8 @@ class HtmlMimeMail5
 
         if (isset($message)) {
             $output = $message->encode();
-            $this->output   = $output['body'];
-            $this->headers  = array_merge($this->headers, $output['headers']);
+            $this->output = $output['body'];
+            $this->headers = array_merge($this->headers, $output['headers']);
 
             // Figure out hostname
             if (!empty($_SERVER['HTTP_HOST'])) {
@@ -699,8 +701,8 @@ class HtmlMimeMail5
      * Function to encode a header if necessary
      * according to RFC2047
      *
-     * @param  string $input   Value to encode
-     * @param  string $charset Character set to use
+     * @param string $input Value to encode
+     * @param string $charset Character set to use
      * @return string          Encoded value
      */
     private function encodeHeader($input, $charset = 'ISO-8859-1')
@@ -717,14 +719,14 @@ class HtmlMimeMail5
     /**
      * Sends the mail.
      *
-     * @param  array  $recipients Array of receipients to send the mail to
-     * @param  string $type       How to send the mail ('mail' or 'sendmail' or 'smtp')
+     * @param array $recipients Array of receipients to send the mail to
+     * @param string $type How to send the mail ('mail' or 'sendmail' or 'smtp')
      * @return mixed
      */
     public function send($recipients, $type = 'mail')
     {
         if (!defined('CRLF')) {
-            $this->setCRLF( ($type == 'mail' OR $type == 'sendmail') ? "\n" : "\r\n");
+            $this->setCRLF(($type == 'mail' OR $type == 'sendmail') ? "\n" : "\r\n");
         }
 
         if (!$this->is_built) {
@@ -778,7 +780,7 @@ class HtmlMimeMail5
                 }
 
                 $pipe = popen($this->sendmail_path . " " . $returnPath, 'w');
-                $bytes = fputs($pipe, implode(CRLF, $headers) . CRLF . CRLF . $this->output);
+                fputs($pipe, implode(CRLF, $headers) . CRLF . CRLF . $this->output);
                 $r = pclose($pipe);
 
                 return $r;
@@ -818,9 +820,9 @@ class HtmlMimeMail5
                 $headers[] = 'To: ' . $this->encodeHeader(implode(', ', $recipients), $this->build_params['head_charset']);
 
                 // Add headers to send_params
-                $send_params['headers']    = $headers;
+                $send_params['headers'] = $headers;
                 $send_params['recipients'] = array_values(array_unique($smtp_recipients));
-                $send_params['body']       = $this->output;
+                $send_params['body'] = $this->output;
 
                 // Setup return path
                 if (isset($this->return_path)) {
@@ -840,6 +842,7 @@ class HtmlMimeMail5
                 return true;
                 break;
         }
+        return false;
     }
 
     /**
@@ -848,10 +851,10 @@ class HtmlMimeMail5
      * adding an email to another email as
      * an attachment. there's a commented
      * out example in example.php.
-     *
-     * @param array  $recipients Array of recipients
-     * @param string $type       Method to be used to send the mail.
-     *                           Used to determine the line ending type.
+     * @param array $recipients Array of recipients
+     * @param string $type Method to be used to send the mail.
+     *                     Used to determine the line ending type.
+     * @return string
      */
     public function getRFC822($recipients, $type = 'mail')
     {
