@@ -22,7 +22,7 @@
 * @package Mail
 */
 
-class Mail_RFC822
+class MailRfc822
 {
     /**
      * The address being parsed by the RFC822 object.
@@ -131,7 +131,7 @@ class Mail_RFC822
     {
 
         if (!isset($this->mailRFC822)) {
-            $obj = new Mail_RFC822($address, $default_domain, $nest_groups, $validate, $limit);
+            $obj = new MailRfc822($address, $default_domain, $nest_groups, $validate, $limit);
             return $obj->parseAddressList();
         }
 

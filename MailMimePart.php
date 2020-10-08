@@ -19,6 +19,8 @@
 * © Copyright 2005 Richard Heyes
 */
 
+namespace htmlMimeMail5;
+
 /**
 *
 *  Raw mime encoding class
@@ -39,7 +41,7 @@
 * // the subpart), we set the body argument to blank.
 *
 * $params['content_type'] = 'multipart/mixed';
-* $email = new Mail_mimePart('', $params);
+* $email = new MailMimePart('', $params);
 *
 * // Here we add a text part to the multipart we have
 * // already. Assume $body contains plain text.
@@ -78,7 +80,7 @@
 * @package Mail
 */
 
-class Mail_MIMEPart
+class MailMimePart
 {
     /**
     * The encoding type of this part
@@ -240,7 +242,7 @@ class Mail_MIMEPart
     */
     public function addSubPart($body, $params)
     {
-        $this->subparts[] = new Mail_MIMEPart($body, $params);
+        $this->subparts[] = new MailMimePart($body, $params);
         
         return $this->subparts[count($this->subparts) - 1];
     }

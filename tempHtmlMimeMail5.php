@@ -20,7 +20,7 @@ set_time_limit(240);
 * © Copyright 2005 Richard Heyes
 */
 
-require_once(dirname(__FILE__) . '/mimePart.php');
+require_once(dirname(__FILE__) . '/MailMimePart.php');
 
 class htmlMimeMail5
 {
@@ -474,7 +474,7 @@ class htmlMimeMail5
         if (!empty($message)) {
             $message->addSubpart($this->text, $params);
         } else {
-            $message = new Mail_mimePart($this->text, $params);
+            $message = new MailMimePart($this->text, $params);
         }
     }
 
@@ -493,7 +493,7 @@ class htmlMimeMail5
         if (!empty($message)) {
             $message->addSubpart($this->html, $params);
         } else {
-            $message = new Mail_mimePart($this->html, $params);
+            $message = new MailMimePart($this->html, $params);
         }
     }
 
@@ -506,7 +506,7 @@ class htmlMimeMail5
     {
         $params['content_type'] = 'multipart/mixed';
 
-        $message = new Mail_mimePart('', $params);
+        $message = new MailMimePart('', $params);
     }
 
     /**
@@ -522,7 +522,7 @@ class htmlMimeMail5
         if (!empty($message)) {
             return $message->addSubpart('', $params);
         } else {
-            $message = new Mail_mimePart('', $params);
+            $message = new MailMimePart('', $params);
         }
     }
 
@@ -539,7 +539,7 @@ class htmlMimeMail5
         if (!empty($message)) {
             return $message->addSubpart('', $params);
         } else {
-            $message = new Mail_mimePart('', $params);
+            $message = new MailMimePart('', $params);
         }
     }
 
@@ -777,10 +777,8 @@ class htmlMimeMail5
                 break;
 
             case 'smtp':
-                require_once(dirname(__FILE__) . '/smtp.php');
-                require_once(dirname(__FILE__) . '/RFC822.php');
-                $smtp = new smtp ($this->smtp_params);
-                $Mail_RFC822 = new Mail_RFC822;
+                $smtp = new Smtp ($this->smtp_params);
+                $Mail_RFC822 = new MailRfc822;
 
                 $smtp->connect($this->smtp_params);
 

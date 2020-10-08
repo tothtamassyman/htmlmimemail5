@@ -25,7 +25,7 @@ set_time_limit(240);
 define('SMTP_STATUS_NOT_CONNECTED', 1, true);
 define('SMTP_STATUS_CONNECTED', 2, true);
 
-class smtp
+class Smtp
 {
     private $authenticated;
     private $connection;
@@ -91,7 +91,7 @@ class smtp
     public function connect($params = array())
     {
         if (!isset($this->status)) {
-            $obj = new smtp($params);
+            $obj = new Smtp($params);
             if($obj->connect()){
                 $obj->status = SMTP_STATUS_CONNECTED;
             }
