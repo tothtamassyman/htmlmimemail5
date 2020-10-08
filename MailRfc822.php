@@ -1,5 +1,16 @@
 <?php
 /**
+ * Created by PhpStorm
+ * User: toth1tamas114
+ * Date: 2020. 10. 08.
+ * Time: 9:20
+ */
+
+namespace HtmlMimeMail5;
+
+use stdClass;
+
+/**
 * RFC 822 Email address list validation Utility
 *
 * What is it?

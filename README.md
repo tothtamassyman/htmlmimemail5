@@ -12,9 +12,9 @@ So off we go down the yellow brick road. Get ready Oz.
 
 ```php
 <?php
-    require_once("tempHtmlMimeMail5.php");
+    require_once("HtmlMimeMail5.php");
     
-    $mail = new htmlMimeMail5();
+    $mail = new HtmlMimeMail5();
 ?>
 ```
 

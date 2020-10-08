@@ -1,5 +1,14 @@
 <?php
 /**
+ * Created by PhpStorm
+ * User: toth1tamas114
+ * Date: 2020. 10. 08.
+ * Time: 9:21
+ */
+
+namespace htmlMimeMail5;
+
+/**
 * This file is part of the htmlMimeMail5 package (http://www.phpguru.org/)
 *
 * htmlMimeMail5 is free software; you can redistribute it and/or modify
@@ -18,8 +27,6 @@
 * 
 * © Copyright 2005 Richard Heyes
 */
-
-namespace htmlMimeMail5;
 
 /**
 *

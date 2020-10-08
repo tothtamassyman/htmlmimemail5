@@ -1,6 +1,12 @@
 <?php
+/**
+ * Created by PhpStorm
+ * User: toth1tamas114
+ * Date: 2020. 10. 08.
+ * Time: 9:21
+ */
 
-set_time_limit(240);
+namespace HtmlMimeMail5;
 
 /**
 * This file is part of the htmlMimeMail5 package (http://www.phpguru.org/)
@@ -22,6 +28,7 @@ set_time_limit(240);
 * © Copyright 2005 Richard Heyes
 */
 
+set_time_limit(240);
 define('SMTP_STATUS_NOT_CONNECTED', 1, true);
 define('SMTP_STATUS_CONNECTED', 2, true);
 
