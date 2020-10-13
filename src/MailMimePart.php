@@ -6,7 +6,7 @@
  * Time: 9:21
  */
 
-namespace htmlMimeMail5;
+namespace HtmlMimeMail5;
 
 /**
  * This file is part of the htmlMimeMail5 package (http://www.phpguru.org/)
