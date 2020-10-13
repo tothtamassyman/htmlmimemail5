@@ -225,7 +225,7 @@ class HtmlMimeMail5
      *
      * @param object $encoding Text encoding to use
      */
-    public function setTextEncoding(iEncoding $encoding)
+    public function setTextEncoding(IEncoding $encoding)
     {
         $this->build_params['text_encoding'] = $encoding;
     }
@@ -235,7 +235,7 @@ class HtmlMimeMail5
      *
      * @param object $encoding HTML encoding to use
      */
-    public function setHTMLEncoding(iEncoding $encoding)
+    public function setHTMLEncoding(IEncoding $encoding)
     {
         $this->build_params['html_encoding'] = $encoding;
     }
