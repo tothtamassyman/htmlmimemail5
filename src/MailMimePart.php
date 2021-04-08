@@ -92,31 +92,31 @@ class MailMimePart
      * The encoding type of this part
      * @var string
      */
-    private $encoding;
+    private string $encoding;
 
     /**
      * An array of subparts
      * @var array
      */
-    private $subparts;
+    private array $subparts;
 
     /**
      * The output of this part after being built
-     * @var string
+     * @var array
      */
-    private $encoded;
+    private array $encoded;
 
     /**
      * Headers for this part
      * @var array
      */
-    private $headers;
+    private array $headers;
 
     /**
      * The body of this part (not encoded)
      * @var string
      */
-    private $body;
+    private string $body;
 
     /**
      * Constructor.
@@ -137,7 +137,7 @@ class MailMimePart
     public function __construct($body = '', $params = array())
     {
         if (!defined('MAIL_MIMEPART_CRLF')) {
-            define('MAIL_MIMEPART_CRLF', defined('MAIL_MIME_CRLF') ? MAIL_MIME_CRLF : "\r\n", true);
+            define('MAIL_MIMEPART_CRLF', defined('MAIL_MIME_CRLF') ? MAIL_MIME_CRLF : "\r\n");
         }
 
         foreach ($params as $key => $value) {
@@ -297,8 +297,8 @@ class MailMimePart
         $escape = '=';
         $output = '';
 
-        while (list(, $line) = each($lines)) {
-
+//        while (list(, $line) = each($lines)) {
+        foreach ($lines as $key => $line) {
             $linlen = strlen($line);
             $newline = '';
 
@@ -310,7 +310,8 @@ class MailMimePart
                     $char = '=20';
 
                 } elseif ($dec == 9) {
-                    ; // Do nothing if a tab.
+                    $doNothing = null;
+                    // Do nothing if a tab.
                 } elseif (($dec == 61) OR ($dec < 32) OR ($dec > 126)) {
                     $char = $escape . strtoupper(sprintf('%02s', dechex($dec)));
                 }

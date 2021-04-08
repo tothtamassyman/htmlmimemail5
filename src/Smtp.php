@@ -29,8 +29,8 @@ namespace HtmlMimeMail5;
  */
 
 set_time_limit(240);
-define('SMTP_STATUS_NOT_CONNECTED', 1, true);
-define('SMTP_STATUS_CONNECTED', 2, true);
+define('SMTP_STATUS_NOT_CONNECTED', 1);
+define('SMTP_STATUS_CONNECTED', 2);
 
 class Smtp
 {
@@ -69,7 +69,7 @@ class Smtp
     {
 
         if (!defined('CRLF'))
-            define('CRLF', "\r\n", TRUE);
+            define('CRLF', "\r\n");
 
         $this->authenticated = FALSE;
         $this->timeout = 5;
